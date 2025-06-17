@@ -80,7 +80,7 @@ section {
 
 /* Header Styles */
 header {
-    background-color: var(--white);
+    background-color: var(--light-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
@@ -578,4 +578,12 @@ footer {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.logo .last-name {
+    color: #040404; /* Red color */
+    /* You can also use other red variations like:
+       color: #e74c3c; (a nicer red)
+       color: var(--accent-color); (if you want to use your accent color)
+    */
 }
