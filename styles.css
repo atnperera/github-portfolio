@@ -399,6 +399,122 @@ header .container {
     opacity: 1;
 }
 
+/* Education Section Styles */
+.education {
+    background-color: var(--light-color);
+}
+
+.education-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.education-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-color);
+}
+
+.education-item {
+    position: relative;
+    padding-left: 100px;
+    margin-bottom: 50px;
+}
+
+.education-date {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.education-content {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.education-content::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 30px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid var(--white);
+}
+
+.education-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.education-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.education-content p {
+    color: var(--text-light);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .education-container::before {
+        left: 40px;
+    }
+    
+    .education-item {
+        padding-left: 80px;
+    }
+    
+    .education-date {
+        width: 60px;
+        height: 60px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .education-container::before {
+        display: none;
+    }
+    
+    .education-item {
+        padding-left: 0;
+    }
+    
+    .education-date {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    
+    .education-content::before {
+        display: none;
+    }
+}
+
 /* Contact Section */
 .contact-content {
     display: flex;
