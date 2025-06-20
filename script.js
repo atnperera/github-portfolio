@@ -124,3 +124,43 @@ document.addEventListener('DOMContentLoaded', function() {
         bar.style.width = width;
     });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    // Hero section animation
+    const heroElements = [
+        document.querySelector('.hero-content h1'),
+        document.querySelector('.hero-content h4'),
+        document.querySelector('.hero-content p'),
+        document.querySelector('.hero-content .btn'),
+        document.querySelector('.hero-image img')
+    ];
+
+    // Function to trigger animations
+    function animateHero() {
+        heroElements.forEach(element => {
+            if (element) {
+                element.classList.add('animate-in');
+            }
+        });
+    }
+
+    // Trigger on page load
+    setTimeout(animateHero, 300);
+
+    // Optional: Re-animate when scrolled to (for single-page apps)
+    window.addEventListener('scroll', function() {
+        const heroSection = document.querySelector('.hero');
+        if (isElementInViewport(heroSection)) {
+            animateHero();
+        }
+    });
+
+    // Helper function to check if element is in viewport
+    function isElementInViewport(el) {
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+});

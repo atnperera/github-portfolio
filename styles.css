@@ -703,3 +703,44 @@ footer {
        color: var(--accent-color); (if you want to use your accent color)
     */
 }
+/* Add to your styles.css */
+.hero-content h1, 
+.hero-content h4,
+.hero-content p,
+.hero-content .btn,
+.hero-image img {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+/* Animation classes to be added by JS */
+.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Stagger delays */
+.hero-content h1 { transition-delay: 0.2s; }
+.hero-content h4 { transition-delay: 0.4s; }
+.hero-content p { transition-delay: 0.6s; }
+.hero-content .btn { transition-delay: 0.8s; }
+.hero-image img { transition-delay: 1s; }
+
+/* Subtle pulse animation on the profile image */
+@keyframes subtlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+.hero-image img {
+    animation: subtlePulse 8s infinite ease-in-out;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Hover effect on button */
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
