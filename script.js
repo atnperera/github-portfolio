@@ -164,3 +164,39 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     }
 });
+// Expandable section toggle
+document.querySelector('.expand-btn').addEventListener('click', function() {
+  this.closest('.expandable-section').classList.toggle('expanded');
+  this.innerHTML = this.closest('.expandable-section').classList.contains('expanded') ? 
+    'Read Less <i class="fas fa-chevron-up"></i>' : 
+    'Read More <i class="fas fa-chevron-down"></i>';
+});
+
+// Email/Phone click handlers
+document.querySelector('.email-hover').addEventListener('click', function() {
+  navigator.clipboard.writeText(this.textContent.trim());
+  alert('Email copied to clipboard!');
+});
+
+document.querySelector('.phone-hover').addEventListener('click', function() {
+  window.open('tel:' + this.textContent.trim().replace(/\s/g, ''));
+});
+
+// Scroll animation trigger
+const aboutObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelector('.about-content').classList.add('in-view');
+      aboutObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+aboutObserver.observe(document.querySelector('#about'));
+
+// Profile image QR code toggle
+document.querySelector('.interactive-profile').addEventListener('click', function(e) {
+  if (!e.target.closest('.qr-code')) {
+    this.classList.toggle('show-qr');
+  }
+});
