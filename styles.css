@@ -769,62 +769,45 @@ footer {
   100% { opacity: 0; transform: translateY(-20px); }
 }
 /* Profile Image Effects */
+/* Profile Image Effects */
 .interactive-profile {
   position: relative;
-  perspective: 1000px;
-  cursor: pointer;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   transition: transform 0.5s ease;
 }
 
 .profile-img {
   width: 100%;
+  height: 100%;
   transition: all 0.5s ease;
-  transform-style: preserve-3d;
+  z-index: 3;
+  position: relative;
+  border-radius: 15px;
 }
 
-.profile-overlay {
+.profile-hover-effect {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(52, 152, 219, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: white/* linear-gradient(100deg, rgba(52,152,219,0.2) 0%, rgba(155,89,182,0.2) 100%);*/
   opacity: 0;
   transition: opacity 0.5s ease;
 }
 
-.qr-code {
-  text-align: center;
-  color: white;
-  transform: scale(0.8);
-  transition: transform 0.5s ease;
+.interactive-profile:hover {
+  transform: translateY(-5px);
 }
 
-.qr-code img {
-  width: 150px;
-  margin-bottom: 10px;
-}
-
-.interactive-profile:hover .profile-overlay {
+.interactive-profile:hover .profile-hover-effect {
   opacity: 1;
 }
 
-.interactive-profile:hover .qr-code {
-  transform: scale(1);
-}
-
 .interactive-profile:hover .profile-img {
-  transform: rotateY(180deg);
-}
-
-.interactive-profile:hover {
-  transform: translateY(-10px);
+  transform: scale(1.03);
 }
 
 /* Typing Animation */
@@ -836,27 +819,25 @@ footer {
 .typing-text {
   overflow: hidden;
   white-space: nowrap;
-  animation: typing 2s steps(40, end);
-  border-right: 3px solid var(--primary-color);
-  animation-fill-mode: forwards;
+  animation: typing 1.5s steps(30, end);
+  border-right: 2px solid var(--primary-color);
 }
 
-/* Degree Pulse Effect */
-.degree-pulse {
-  animation: pulse 2s infinite alternate;
-  color: var(--primary-color);
+/* Degree Glow Animation */
+.degree-glow {
+  animation: glow-pulse 2.5s infinite alternate;
 }
 
-@keyframes pulse {
-  from { transform: scale(1); }
-  to { transform: scale(1.05); }
+@keyframes glow-pulse {
+  0% { text-shadow: 0 0 5px rgba(52,152,219,0.3); }
+  100% { text-shadow: 0 0 15px rgba(52,152,219,0.5); }
 }
 
 /* Slide-in Paragraphs */
 .slide-in {
   opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.8s ease;
+  transform: translateX(-20px);
+  transition: all 0.6s ease;
 }
 
 .slide-in:nth-child(1) { transition-delay: 0.2s; }
@@ -866,27 +847,30 @@ footer {
 .expandable-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease;
+  transition: max-height 0.5s cubic-bezier(0.65,0,0.35,1);
 }
 
 .expandable-section.expanded .expandable-content {
-  max-height: 500px;
+  max-height: 300px;
 }
 
 .expand-btn {
   background: transparent;
   color: var(--primary-color);
-  border: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
   padding: 8px 15px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-top: 10px;
   transition: all 0.3s ease;
 }
 
 .expand-btn:hover {
-  color: var(--secondary-color);
+  background: var(--primary-color);
+  color: white;
 }
 
 .expand-btn i {
@@ -900,65 +884,104 @@ footer {
 /* Pop-in Details */
 .pop-in {
   opacity: 0;
-  transform: scale(0.8);
+  transform: translateY(10px);
   animation: popIn 0.5s ease forwards;
 }
 
 @keyframes popIn {
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
 /* Set different delays for each item */
-.pop-in:nth-child(1) { animation-delay: 0.6s; }
-.pop-in:nth-child(2) { animation-delay: 0.7s; }
-.pop-in:nth-child(3) { animation-delay: 0.8s; }
-.pop-in:nth-child(4) { animation-delay: 0.9s; }
-.pop-in:nth-child(5) { animation-delay: 1.0s; }
-.pop-in:nth-child(6) { animation-delay: 1.1s; }
+.pop-in:nth-child(1) { animation-delay: 0.3s; }
+.pop-in:nth-child(2) { animation-delay: 0.4s; }
+.pop-in:nth-child(3) { animation-delay: 0.5s; }
+.pop-in:nth-child(4) { animation-delay: 0.6s; }
+.pop-in:nth-child(5) { animation-delay: 0.7s; }
+.pop-in:nth-child(6) { animation-delay: 0.8s; }
 
-/* Hover Effects */
-.email-hover:hover, .phone-hover:hover {
-  color: var(--primary-color);
-  text-decoration: underline;
+/* Interactive Elements */
+.copyable {
   cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.copyable:hover {
+  color: var(--primary-color);
+}
+
+.copyable::after {
+  content: 'Copy';
+  position: absolute;
+  right: -45px;
+  font-size: 0.8em;
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copyable:hover::after {
+  opacity: 1;
+}
+
+.click-to-call {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.click-to-call:hover {
+  color: var(--primary-color);
 }
 
 /* Download Button Animation */
 .download-btn {
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .download-btn .btn-text {
+  display: inline-block;
   transition: transform 0.3s ease;
 }
 
 .download-btn i {
-  position: absolute;
-  right: -20px;
+  position: relative;
+  left: -10px;
+  opacity: 0;
   transition: all 0.3s ease;
 }
 
+.download-btn:hover {
+  padding-right: 40px;
+  padding-left: 20px;
+}
+
 .download-btn:hover .btn-text {
-  transform: translateX(-10px);
+  transform: translateX(10px);
 }
 
 .download-btn:hover i {
-  right: 20px;
+  left: 15px;
+  opacity: 1;
 }
 
 /* Scroll Animation */
 .about-content {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(30px);
   transition: all 0.8s ease;
 }
 
 .about-content.in-view {
-  opacity: 1;
+  opacity: 100;
   transform: translateY(0);
 }
 

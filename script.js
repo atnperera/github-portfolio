@@ -172,14 +172,22 @@ document.querySelector('.expand-btn').addEventListener('click', function() {
     'Read More <i class="fas fa-chevron-down"></i>';
 });
 
-// Email/Phone click handlers
-document.querySelector('.email-hover').addEventListener('click', function() {
+// Email copy functionality
+document.querySelector('.copyable').addEventListener('click', function() {
   navigator.clipboard.writeText(this.textContent.trim());
-  alert('Email copied to clipboard!');
+  
+  // Visual feedback
+  const originalText = this.textContent;
+  this.textContent = 'Copied!';
+  setTimeout(() => {
+    this.textContent = originalText;
+  }, 1500);
 });
 
-document.querySelector('.phone-hover').addEventListener('click', function() {
-  window.open('tel:' + this.textContent.trim().replace(/\s/g, ''));
+// Phone click-to-call
+document.querySelector('.click-to-call').addEventListener('click', function() {
+  const phoneNumber = this.textContent.trim().replace(/\s/g, '');
+  window.open(`tel:${phoneNumber}`);
 });
 
 // Scroll animation trigger
@@ -193,10 +201,3 @@ const aboutObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 aboutObserver.observe(document.querySelector('#about'));
-
-// Profile image QR code toggle
-document.querySelector('.interactive-profile').addEventListener('click', function(e) {
-  if (!e.target.closest('.qr-code')) {
-    this.classList.toggle('show-qr');
-  }
-});
