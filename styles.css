@@ -744,3 +744,27 @@ footer {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+.rotating-roles {
+  height: 1.5em;
+  position: relative;
+  display: inline-flexbox;
+}
+
+.rotating-roles span {
+  position: absolute;
+  opacity: 0;
+  animation: rotateRoles 12s infinite;
+}
+
+.rotating-roles span:nth-child(1) { animation-delay: 0s; }
+.rotating-roles span:nth-child(2) { animation-delay: 3s; }
+.rotating-roles span:nth-child(3) { animation-delay: 6s; }
+.rotating-roles span:nth-child(4) { animation-delay: 9s; }
+
+@keyframes rotateRoles {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  25% { opacity: 1; transform: translateY(0); }
+  35% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
